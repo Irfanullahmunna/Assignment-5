@@ -5,7 +5,13 @@ document.getElementById('search-button').addEventListener('click', () => {
     fetch(url + inputMealName)
     .then(res => res.json())
     .then(data => displayMeal(data))
-})
+    .catch(error => {
+        document.getElementById("meal-details").innerHTML = `
+        <p>Not available right now sir! <br>Try another one please..</p>
+        `;
+    });
+});
+
 const displayMeal = data => {
     const mealDiv = document.getElementById('meal-list');
     document.getElementById('meal-list').innerHTML = ``;
@@ -28,7 +34,7 @@ const displayMeal = data => {
                 <li><input type="checkbox" checked>${meal.strIngredient4}</li>
                 <li><input type="checkbox" checked>${meal.strIngredient5}</li>
             `;
-        })
+        });
     });
 }
 // End Assignment JavaScript Final Code
@@ -38,13 +44,8 @@ const displayMeal = data => {
 
 
 
-
-
-
-
-
-
 // Working JavaScript Code
+
 // document.getElementById('search-button').addEventListener('click', () => {
 //     const inputMeal = document.getElementById('input-text').value;
 //     fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=' + inputMeal)
